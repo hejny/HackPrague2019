@@ -1,13 +1,9 @@
-import {
-    IGetAboutQuery,
-    IGetAboutResponse,
-} from '../../../interfaces/routes/about';
+import { IGetAboutResponse } from '../../../interfaces/routes/about';
 import { version } from '../../../package.json';
 
-export async function getAbout(
-    query: IGetAboutQuery,
-): Promise<IGetAboutResponse> {
+export async function getAbout(): Promise<IGetAboutResponse> {
     return {
+        status: 'ok',
         version,
     };
 }

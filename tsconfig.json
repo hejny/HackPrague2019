@@ -1,8 +1,6 @@
 {
     "compilerOptions": {
         "downlevelIteration": true,
-        "baseUrl": ".",
-        "outDir": "build/dist",
         "sourceMap": true,
         "allowJs": true,
         "jsx": "react",

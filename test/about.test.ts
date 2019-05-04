@@ -9,7 +9,7 @@ export default describe('About route', () => {
         request(app)
             .get(`/about`)
             .expect(200)
-            .expect({ version }));
+            .expect({ status: 'ok', version }));
     /*.expect((res) => {
                 console.log('res', res.body);
                 res.body.should.include('version');

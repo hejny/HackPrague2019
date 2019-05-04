@@ -1,15 +1,17 @@
 import {
-    IGetAboutQuery,
-    IGetAboutResponse,
-} from '../../../interfaces/routes/about';
-import * as path from 'path';
+    IPostItemRequest,
+    IPostItemResponse,
+} from './../../../interfaces/routes/item';
+import { Item } from '../../model/Item';
 
-const { version } = require(path.join(__dirname, '../../package.json'));
+export async function postItem(
+    query: void,
+    request: IPostItemRequest,
+): Promise<IPostItemResponse> {
+    const item = await Item.query().insert(new Item(request.item));
 
-export async function getAbout(
-    query: IGetAboutQuery,
-): Promise<IGetAboutResponse> {
     return {
-        version,
+        status: 'created',
+        item,
     };
 }

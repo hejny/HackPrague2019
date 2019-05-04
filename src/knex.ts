@@ -2,6 +2,7 @@ import { Model } from 'objection';
 import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from './config';
 import * as Knex from 'knex';
 
+//todo better
 export const knex = Knex({
     client: 'mysql',
     connection: {
