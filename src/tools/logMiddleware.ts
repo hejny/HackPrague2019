@@ -1,7 +1,7 @@
 import { RequestHandler, Request, Response } from 'express';
-import { Raw } from '../model/Raw';
+import { Log } from '../model/Log';
 
-export const rawLogMiddleware: RequestHandler = (req, res, next) => {
+export const logMiddleware: RequestHandler = (req, res, next) => {
     const { write, end } = res;
     const chunks = new Array<any>();
     (res as any).write = (...args: any[]) => {
@@ -18,26 +18,27 @@ export const rawLogMiddleware: RequestHandler = (req, res, next) => {
             chunks.push(Buffer.from(args[0]));
         }
         const responseBody = Buffer.concat(chunks).toString('utf8');
-        const raw = new Raw({
-            ApiKey: `${req.headers.Authorization}`,
-            Endpoint: req.path,
-            Request: JSON.stringify({
+        const raw = new Log({
+            apiKey: `${req.headers.Authorization}`,
+            endpoint: req.path,
+            statusCode: res.statusCode,
+            request: JSON.stringify({
                 headers: req.headers,
                 body: req.body,
                 query: req.query,
                 method: req.method,
             }),
-            Response: JSON.stringify({
+            response: JSON.stringify({
                 status: res.statusCode,
                 body: responseBody,
             }),
         });
-        await Raw.query().insert(raw);
+        await Log.query().insert(raw);
         endStream();
     };
     next();
 };
 
 function shouldSkipLogging(req: Request, res: Response) {
-    return res.statusCode !== 500 && req.method === 'GET';
+    return res.statusCode === 200 && req.method === 'GET';
 }

@@ -1,6 +1,9 @@
+import { initDBConnection } from './knex';
 import { createApp } from './createApp';
 import { PORT } from './config';
 import { logger } from './tools/logger';
+
+initDBConnection();
 
 const app = createApp();
 

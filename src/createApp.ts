@@ -6,7 +6,7 @@ import { IGetAboutQuery } from './../interfaces/routes/about/IGetAboutQuery';
 import { getAbout } from './routes/getAbout';
 import { createGetRouteHandler } from './tools/createRouteHandler';
 import { expressLogger } from './tools/logger';
-import { rawLogMiddleware } from './tools/rawLogMiddleware';
+import { logMiddleware } from './tools/logMiddleware';
 
 export function createApp(): express.Express {
     const app = express();
@@ -15,7 +15,7 @@ export function createApp(): express.Express {
     app.use(cors());
     app.use(expressLogger());
 
-    app.use(rawLogMiddleware);
+    app.use(logMiddleware);
 
     app.get(
         ['/', '/about'],
