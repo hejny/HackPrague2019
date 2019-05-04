@@ -1,8 +1,6 @@
 import * as request from 'supertest';
 import { createApp } from '../src/createApp';
-import * as path from 'path';
-
-const { version } = require(path.join(__dirname, '../package.json'));
+import { version } from '../package.json';
 
 const app = createApp();
 

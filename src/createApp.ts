@@ -1,9 +1,8 @@
-import { IGetAboutResponse } from '../interfaces/routes/about/IGetAboutResponse';
+import { IGetAboutResponse, IGetAboutQuery } from '../interfaces/routes/about';
 import { json } from 'body-parser';
 import * as cors from 'cors';
 import * as express from 'express';
-import { IGetAboutQuery } from './../interfaces/routes/about/IGetAboutQuery';
-import { getAbout } from './routes/getAbout';
+import { getAbout } from './routes/about/getAbout';
 import { createGetRouteHandler } from './tools/createRouteHandler';
 import { expressLogger } from './tools/logger';
 import { logMiddleware } from './tools/logMiddleware';

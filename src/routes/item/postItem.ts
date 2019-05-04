@@ -1,5 +1,7 @@
-import { IGetAboutQuery } from '../../interfaces/routes/about/IGetAboutQuery';
-import { IGetAboutResponse } from '../../interfaces/routes/about/IGetAboutResponse';
+import {
+    IGetAboutQuery,
+    IGetAboutResponse,
+} from '../../../interfaces/routes/about';
 import * as path from 'path';
 
 const { version } = require(path.join(__dirname, '../../package.json'));

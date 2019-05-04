@@ -15,6 +15,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "experimentalDecorators": true,
         "noUnusedLocals": false,
+        "resolveJsonModule": true,
         "target": "es6",
         "module": "commonjs",
         "lib": ["es2017"]
