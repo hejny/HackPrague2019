@@ -17,8 +17,7 @@
         "noUnusedLocals": false,
         "target": "es6",
         "module": "commonjs",
-        "lib": ["es2017"],
-        "rootDir": "./../../"
+        "lib": ["es2017"]
     },
     "exclude": [
         "node_modules",

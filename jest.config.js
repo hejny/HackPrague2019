@@ -1,9 +1,7 @@
 module.exports = {
+    verbose: true,
+    collectCoverage: true,
     preset: 'ts-jest',
     testEnvironment: 'node',
-    setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
-    // moduleFileExtensions: ['ts', 'tsx'],
-    // testMatch: [
-    //   'src/**/*.+test\.(ts|tsx)'
-    // ]
+    moduleFileExtensions: ['js', 'ts', 'tsx'],
 };

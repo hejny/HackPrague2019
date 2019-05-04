@@ -9,11 +9,12 @@
         "prettier-watch": "onchange \"**/*.{js,ts,tsx,json,css}\" -- prettier --config .prettierrc --write \"{{changed}}\"",
         "server": "clear & clear & export TZ=\"Europe/Amsterdam\"; ts-node -P ./tsconfig.json -r dotenv/config src/index.ts",
         "server-watch": "onchange -i \"./src/**/*.{ts,tsx,json}\" -- npm run server",
-        "server-test": "jest --runInBand",
-        "server-test-watch": "npm run test -- --watch"
+        "test": "jest --runInBand",
+        "test-watch": "npm run test -- --watch"
     },
     "dependencies": {
         "@types/cors": "^2.8.5",
+        "@types/jest": "^24.0.12",
         "@types/morgan": "^1.7.35",
         "axios": "^0.18.0",
         "body-parse": "^0.1.0",
