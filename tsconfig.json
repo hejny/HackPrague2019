@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "downlevelIteration": true,
+        "baseUrl": ".",
+        "outDir": "build/dist",
+        "sourceMap": true,
+        "allowJs": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "experimentalDecorators": true,
+        "noUnusedLocals": false,
+        "target": "es6",
+        "module": "commonjs",
+        "lib": ["es2017"],
+        "rootDir": "./../../"
+    },
+    "exclude": [
+        "node_modules",
+        "build",
+        "scripts",
+        "acceptance-tests",
+        "webpack",
+        "jest",
+        "src/setupTests.ts"
+    ]
+}
