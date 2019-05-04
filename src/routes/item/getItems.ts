@@ -7,7 +7,9 @@ import {
 export async function getItems(
     query: IGetItemsQuery,
 ): Promise<IGetItemsResponse> {
-    const items = await Item.query().select();
+    const items = await Item.query()
+        .select()
+        .map((raw) => new Item(raw));
 
     return {
         status: 'ok',

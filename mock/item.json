@@ -1,0 +1,12 @@
+{
+    "status": "ok",
+    "item": {
+        "uuid": "784a0b06-7b8e-4fc1-bdf0-b4fcd066269a",
+        "created": "2019-05-04 22:18:35",
+        "id": 43,
+        "content": {
+            "test": "test",
+            "salt": "36274dba-410c-478d-8225-c57029251e31"
+        }
+    }
+}

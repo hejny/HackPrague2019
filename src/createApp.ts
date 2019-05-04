@@ -30,6 +30,7 @@ export function createApp(): express.Express {
     app.use(json());
     app.use(cors());
     app.use(expressLogger());
+    app.set('json spaces', 4);
 
     app.use(logMiddleware);
 

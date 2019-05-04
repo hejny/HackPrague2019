@@ -9,7 +9,8 @@ export async function getItem({
 }: IGetItemQuery): Promise<IGetItemResponse> {
     const items = await Item.query()
         .where({ uuid: id })
-        .select();
+        .select()
+        .map((raw) => new Item(raw));
 
     if (items.length === 0) {
         return {
