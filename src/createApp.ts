@@ -1,12 +1,12 @@
+import { IGetAboutResponse } from '../interfaces/routes/about/IGetAboutResponse';
 import { json } from 'body-parser';
 import * as cors from 'cors';
 import * as express from 'express';
-import { createRouteHandler } from './tools/createRouteHandler';
+import { IGetAboutQuery } from './../interfaces/routes/about/IGetAboutQuery';
+import { getAbout } from './routes/getAbout';
+import { createGetRouteHandler } from './tools/createRouteHandler';
 import { expressLogger } from './tools/logger';
 import { rawLogMiddleware } from './tools/rawLogMiddleware';
-import { getAbout } from './routes/getAbout';
-import { IGetAboutQuery } from './interfaces/routes/about/IGetAboutQuery';
-import { IGetAboutResponse } from './interfaces/routes/about/IGetAboutResponse';
 
 export function createApp(): express.Express {
     const app = express();
@@ -19,7 +19,7 @@ export function createApp(): express.Express {
 
     app.get(
         ['/', '/about'],
-        createRouteHandler<IGetAboutQuery, void, IGetAboutResponse>(getAbout),
+        createGetRouteHandler<IGetAboutQuery, IGetAboutResponse>(getAbout),
     );
 
     return app;

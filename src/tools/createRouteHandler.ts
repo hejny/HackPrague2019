@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-export function createRouteHandler<TQuery, TRequest, TResponse>(
+function createRouteHandler<TQuery, TRequest, TResponse>(
     handler: (query: TQuery, request: TRequest) => Promise<TResponse>,
 ): RequestHandler {
     return async (request, response, next) => {
@@ -17,4 +17,16 @@ export function createRouteHandler<TQuery, TRequest, TResponse>(
             next(error);
         }
     };
+}
+
+export function createGetRouteHandler<TQuery, TResponse>(
+    handler: (query: TQuery) => Promise<TResponse>,
+): RequestHandler {
+    return createRouteHandler<TQuery, void, TResponse>(handler);
+}
+
+export function createPostRouteHandler<TQuery, TRequest, TResponse>(
+    handler: (query: TQuery, request: TRequest) => Promise<TResponse>,
+): RequestHandler {
+    return createRouteHandler<TQuery, TRequest, TResponse>(handler);
 }
