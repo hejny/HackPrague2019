@@ -7,6 +7,7 @@ import {
 } from '../../../interfaces/routes/record';
 import { getFaceData } from '../../tools/getFaceData';
 import * as crypto from 'crypto';
+import { geocodeReverse } from '../../tools/geocodeReverse';
 
 export async function postItem(
     query: void,
@@ -38,8 +39,8 @@ export async function postItem(
             owner: 0,
             recorded: new Date(request.record.recorded),
             coords_latitude: request.record.position.latitude,
-            coords_longitude: request.record.position.longtude,
-            geojson: {},
+            coords_longitude: request.record.position.longitude,
+            geojson: await geocodeReverse(request.record.position),
             ratings,
         }),
     );

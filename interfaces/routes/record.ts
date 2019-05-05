@@ -16,7 +16,7 @@ export interface IPostRecordRequest {
     record: {
         position: {
             latitude: number;
-            longtude: number;
+            longitude: number;
         };
         faceImage: string;
         noiseSound: string;

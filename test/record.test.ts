@@ -25,7 +25,7 @@ export default describe('Record route', () => {
                 record: {
                     position: {
                         latitude: 50,
-                        longtude: 14,
+                        longitude: 14,
                     },
                     faceImage: FACE_IMAGE,
                     noiseSound: NOISE_SOUND,
@@ -43,7 +43,7 @@ export default describe('Record route', () => {
                 record: {
                     position: {
                         latitude: 50,
-                        longtude: 14,
+                        longitude: 14,
                     },
                     faceImage: ``,
                     noiseSound: ``,
