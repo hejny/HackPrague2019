@@ -11,7 +11,7 @@ export class File extends AbstractModel {
     mime: string;
     name: string;
     hash: string;
-    data: string;
+    content: Buffer;
 
     constructor(raw: Partial<File> = {}) {
         super();
