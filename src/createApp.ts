@@ -1,11 +1,10 @@
 import {
-    IGetItemsQuery,
-    IGetItemsResponse,
-    IGetItemQuery,
-    IGetItemResponse,
-    IPostItemRequest,
-    IPostItemResponse,
-} from './../interfaces/routes/item';
+    IGetRecordQuery,
+    IGetRecordResponse,
+    IGetRecordsResponse,
+    IPostRecordRequest,
+    IPostRecordResponse,
+} from '../interfaces/routes/record';
 import { IGetAboutResponse } from '../interfaces/routes/about';
 import { json } from 'body-parser';
 import * as cors from 'cors';
@@ -17,9 +16,9 @@ import {
 } from './tools/createRouteHandler';
 import { expressLogger } from './tools/logger';
 import { logMiddleware } from './tools/logMiddleware';
-import { getItems } from './routes/item/getItems';
-import { postItem } from './routes/item/postItem';
-import { getItem } from './routes/item/getItem';
+import { getRecords } from './routes/item/getRecords';
+import { postItem } from './routes/item/postRecord';
+import { getRecord } from './routes/item/getRecord';
 import { initDBConnection } from './knex';
 
 export function createApp(): express.Express {
@@ -27,7 +26,7 @@ export function createApp(): express.Express {
 
     const app = express();
 
-    app.use(json());
+    app.use(json({ limit: '50mb' }));
     app.use(cors());
     app.use(expressLogger());
     app.set('json spaces', 4);
@@ -40,19 +39,19 @@ export function createApp(): express.Express {
     );
 
     app.get(
-        '/items',
-        createRouteHandler<IGetItemsQuery, IGetItemsResponse>(getItems),
+        '/records',
+        createRouteHandler<void, IGetRecordsResponse>(getRecords),
     );
     app.get(
-        '/items/:id',
-        createRouteHandler<IGetItemQuery, IGetItemResponse>(getItem),
+        '/records/:id',
+        createRouteHandler<IGetRecordQuery, IGetRecordResponse>(getRecord),
     );
     app.post(
-        '/items',
+        '/records',
         createRouteHandlerWithRequest<
             void,
-            IPostItemRequest,
-            IPostItemResponse
+            IPostRecordRequest,
+            IPostRecordResponse
         >(postItem),
     );
 

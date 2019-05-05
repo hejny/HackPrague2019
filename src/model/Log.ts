@@ -4,7 +4,7 @@ export class Log extends AbstractModel {
     static tableName = 'Log';
     static idColumn = 'id';
 
-    readonly id: string;
+    readonly id: number;
     created: Date = new Date();
     endpoint: string;
     apiKey: string | null = null;
