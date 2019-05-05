@@ -39,7 +39,27 @@ export async function postItem(
             }),
         );
 
-        ratings = await getFaceData(faceImage);
+        ratings = {
+            face: await getFaceData(faceImage),
+            noice: {
+                volume: Math.random(), //todo real
+            },
+            activity: {
+                rating: Math.random(), //todo real
+            },
+            weather: {
+                rating: Math.random(), //todo real
+            },
+            area: {
+                rating: Math.random(), //todo real,
+            },
+            trafic: {
+                rating: Math.random(), //todo real
+            },
+            polution: {
+                rating: Math.random(), //todo real
+            },
+        };
     }
 
     //console.log(faceImage);

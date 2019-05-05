@@ -38,7 +38,15 @@ export class Record extends AbstractModel {
 
     countRating(): number | null {
         try {
-            return this.ratings.emotion.happiness; //todo more complex
+            return this.ratings.face.emotion.happiness; //todo more complex
+        } catch (e) {
+            return null;
+        }
+    }
+
+    get title(): string | null {
+        try {
+            return (this.geojson as any).features[0].properties.name; //todo more complex
         } catch (e) {
             return null;
         }
@@ -47,7 +55,7 @@ export class Record extends AbstractModel {
     async expanded(): Promise<any> {
         const {
             uuid,
-            created,
+            title,
             recorded,
             coords_latitude,
             coords_longitude,
@@ -66,7 +74,7 @@ export class Record extends AbstractModel {
 
         return {
             uuid,
-            created,
+            title,
             recorded,
             coordinates,
             geojson,
@@ -79,6 +87,7 @@ export class Record extends AbstractModel {
     async collapsed(): Promise<any> {
         const {
             uuid,
+            title,
             recorded,
             coordinates,
             rating,
@@ -86,6 +95,7 @@ export class Record extends AbstractModel {
         } = await this.expanded();
         return {
             uuid,
+            title,
             recorded,
             coordinates,
             rating,

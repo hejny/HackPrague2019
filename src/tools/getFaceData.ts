@@ -1,10 +1,10 @@
 import { File } from './../model/File';
 import { FACE_IMAGE } from './../../test/FACE_IMAGE';
-import { IRatings } from './../../interfaces/IRatings';
+import { IRatings, IRatingsFace } from './../../interfaces/IRatings';
 import { AZURE_APIKEY } from '../config';
 import axios from 'axios';
 
-export async function getFaceData(file: File): Promise<IRatings> {
+export async function getFaceData(file: File): Promise<IRatingsFace> {
     const url =
         'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect';
 
