@@ -1,8 +1,11 @@
-export const DB_HOST = getConfigValue('DB_HOST', 'string'),
+export const 
+    PUBLIC_URL = getConfigValue('PUBLIC_URL', 'string'),
+    DB_HOST = getConfigValue('DB_HOST', 'string'),
     DB_USER = getConfigValue('DB_USER', 'string'),
     DB_PASSWORD = getConfigValue('DB_PASSWORD', 'string'),
     DB_NAME = getConfigValue('DB_NAME', 'string'),
-    PORT = getConfigValue('PORT', 'number');
+    PORT = getConfigValue('PORT', 'number'),
+    AZURE_APIKEY = getConfigValue('AZURE_APIKEY', 'string');
 
 function getConfigValue(key: string, type: 'string'): string;
 function getConfigValue(key: string, type: 'number'): number;

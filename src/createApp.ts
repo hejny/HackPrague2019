@@ -20,6 +20,7 @@ import { getRecords } from './routes/item/getRecords';
 import { postItem } from './routes/item/postRecord';
 import { getRecord } from './routes/item/getRecord';
 import { initDBConnection } from './knex';
+import { createRouteHandlerFile } from './routes/file/getFile';
 
 export function createApp(): express.Express {
     initDBConnection(); //todo better
@@ -54,6 +55,13 @@ export function createApp(): express.Express {
             IPostRecordResponse
         >(postItem),
     );
+
+
+    app.get(
+        '/files/:id',
+        createRouteHandlerFile(),
+    );
+    
 
     return app;
 }

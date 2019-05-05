@@ -19,16 +19,23 @@ export class Record extends AbstractModel {
     constructor(raw: Partial<Record> = {}) {
         super();
         if (typeof raw.geojson === 'string') {
-            raw.geojson = JSON.parse(raw.geojson as any);
+            raw.geojson = JSON.parse(raw.geojson || ('{}' as any));
         }
         if (typeof raw.ratings === 'string') {
-            raw.ratings = JSON.parse(raw.ratings as any);
+            raw.ratings = JSON.parse(raw.ratings || ('{}' as any));
         }
         Object.assign(this, raw);
     }
 
-    $beforeInsert() {
+    serializeToDB() {
         this.geojson = JSON.stringify(this.geojson, null, 4);
-        this.ratings = JSON.stringify(this.ratings, null, 4);
+        this.ratings = JSON.stringify(this.ratings, null, 4) as any;
+    }
+
+    $beforeInsert() {
+        this.serializeToDB();
+    }
+    $beforeUpdate() {
+        this.serializeToDB();
     }
 }

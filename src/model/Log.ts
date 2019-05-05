@@ -6,6 +6,7 @@ export class Log extends AbstractModel {
 
     readonly id: number;
     created: Date = new Date();
+    method: string;
     endpoint: string;
     apiKey: string | null = null;
     statusCode: number;

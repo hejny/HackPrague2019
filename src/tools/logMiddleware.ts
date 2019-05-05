@@ -20,6 +20,7 @@ export const logMiddleware: RequestHandler = (req, res, next) => {
         const responseBody = Buffer.concat(chunks).toString('utf8');
         const raw = new Log({
             apiKey: `${req.headers.Authorization}`,
+            method: req.method,
             endpoint: req.path,
             statusCode: res.statusCode,
             request: JSON.stringify({
