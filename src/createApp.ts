@@ -7,6 +7,7 @@ import {
 } from '../interfaces/routes/record';
 import { IGetAboutResponse } from '../interfaces/routes/about';
 import { json } from 'body-parser';
+import * as path from 'path';
 import * as cors from 'cors';
 import * as express from 'express';
 import { getAbout } from './routes/about/getAbout';
@@ -20,7 +21,7 @@ import { getRecords } from './routes/item/getRecords';
 import { postItem } from './routes/item/postRecord';
 import { getRecord } from './routes/item/getRecord';
 import { initDBConnection } from './knex';
-import { createRouteHandlerFile } from './routes/file/getFile';
+import { createFileRouteHandler } from './routes/file/getFileRoute';
 
 export function createApp(): express.Express {
     initDBConnection(); //todo better
@@ -33,6 +34,8 @@ export function createApp(): express.Express {
     app.set('json spaces', 4);
 
     app.use(logMiddleware);
+
+    app.use(express.static(path.join(__dirname, '..', 'static')));
 
     app.get(
         ['/', '/about'],
@@ -56,12 +59,7 @@ export function createApp(): express.Express {
         >(postItem),
     );
 
-
-    app.get(
-        '/files/:id',
-        createRouteHandlerFile(),
-    );
-    
+    app.get('/files/:id', createFileRouteHandler());
 
     return app;
 }

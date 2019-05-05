@@ -5,8 +5,8 @@
     "private": false,
     "scripts": {
         "start": "npm start server",
-        "prettier": "prettier --config .prettierrc --write \"{src,public}/**/*.{ts,tsx,js,css}\" webpack.config.js",
-        "prettier-watch": "onchange \"**/*.{js,ts,tsx,json,css}\" -- prettier --config .prettierrc --write \"{{changed}}\"",
+        "prettier": "prettier --config .prettierrc --write \"{src,static}/**/*.{ts,tsx,js,css,html}\" webpack.config.js",
+        "prettier-watch": "onchange \"**/*.{js,ts,tsx,json,css,html}\" -- prettier --config .prettierrc --write \"{{changed}}\"",
         "server": "clear & clear & export TZ=\"Europe/Amsterdam\"; ts-node -P ./tsconfig.json -r dotenv/config src/index.ts",
         "server-watch": "onchange -i \"./src/**/*.{ts,tsx,json}\" -- npm run server",
         "expose": "lt --port 3000 --subdomain hackprague2019",

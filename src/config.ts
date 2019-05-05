@@ -1,5 +1,4 @@
-export const 
-    PUBLIC_URL = getConfigValue('PUBLIC_URL', 'string'),
+export const PUBLIC_URL = getConfigValue('PUBLIC_URL', 'string'),
     DB_HOST = getConfigValue('DB_HOST', 'string'),
     DB_USER = getConfigValue('DB_USER', 'string'),
     DB_PASSWORD = getConfigValue('DB_PASSWORD', 'string'),
