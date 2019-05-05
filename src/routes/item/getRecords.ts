@@ -7,7 +7,7 @@ import {
 export async function getRecords(): Promise<IGetRecordsResponse> {
     const records = await Record.query()
         .select()
-        .map((raw) => new Record(raw));
+        .map((raw) => new Record(raw).collapsed());
 
     return {
         status: 'ok',

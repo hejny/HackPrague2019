@@ -32,6 +32,59 @@ export class Record extends AbstractModel {
         this.ratings = JSON.stringify(this.ratings, null, 4) as any;
     }
 
+    countRating(): number | null {
+        try {
+            return this.ratings.emotion.happiness; //todo more complex
+        } catch (e) {
+            return null;
+        }
+    }
+
+    expanded(): any {
+        const {
+            uuid,
+            created,
+            recorded,
+            coords_latitude,
+            coords_longitude,
+            geojson,
+            ratings,
+        } = this;
+
+        const rating = this.countRating();
+        const coordinates = {
+            latitude: coords_latitude,
+            longitude: coords_longitude,
+        };
+        return {
+            uuid,
+            created,
+            recorded,
+            coordinates,
+            geojson,
+            ratings,
+            rating,
+        };
+    }
+
+    collapsed(): any {
+        const {
+            uuid,
+            created,
+            recorded,
+            coordinates,
+            geojson,
+            ratings,
+            rating,
+        } = this.expanded();
+        return {
+            uuid,
+            recorded,
+            coordinates,
+            rating,
+        };
+    }
+
     $beforeInsert() {
         this.serializeToDB();
     }

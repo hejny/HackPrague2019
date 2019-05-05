@@ -38,15 +38,15 @@ export async function postItem(
         new Record({
             owner: 0,
             recorded: new Date(request.record.recorded),
-            coords_latitude: request.record.position.latitude,
-            coords_longitude: request.record.position.longitude,
-            geojson: await geocodeReverse(request.record.position),
+            coords_latitude: request.record.coordinates.latitude,
+            coords_longitude: request.record.coordinates.longitude,
+            geojson: await geocodeReverse(request.record.coordinates),
             ratings,
         }),
     );
 
     return {
         status: 'created',
-        record,
+        record: new Record(record).expanded(),
     };
 }

@@ -23,7 +23,7 @@ export default describe('Record route', () => {
             .post(`/records`)
             .send({
                 record: {
-                    position: {
+                    coordinates: {
                         latitude: 50,
                         longitude: 14,
                     },
@@ -41,7 +41,7 @@ export default describe('Record route', () => {
             .post(`/records`)
             .send({
                 record: {
-                    position: {
+                    coordinates: {
                         latitude: 50,
                         longitude: 14,
                     },

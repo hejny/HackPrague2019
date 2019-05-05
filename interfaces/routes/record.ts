@@ -14,7 +14,7 @@ export interface IRecord {
 
 export interface IPostRecordRequest {
     record: {
-        position: {
+        coordinates: {
             latitude: number;
             longitude: number;
         };

@@ -10,7 +10,7 @@ export async function getRecord({
     const records = await Record.query()
         .where({ uuid: id })
         .select()
-        .map((raw) => new Record(raw));
+        .map((raw) => new Record(raw).expanded());
 
     if (records.length === 0) {
         return {
