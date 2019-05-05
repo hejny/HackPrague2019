@@ -42,7 +42,7 @@ export async function postItem(
         ratings = await getFaceData(faceImage);
     }
 
-    console.log(faceImage);
+    //console.log(faceImage);
 
     const record = await Record.query().insert(
         new Record({

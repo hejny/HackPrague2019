@@ -1,3 +1,4 @@
+import { MOCK1 } from './MOCK1';
 import { FACE_IMAGE } from './FACE_IMAGE';
 import * as request from 'supertest';
 import { createApp } from '../src/createApp';
@@ -18,6 +19,7 @@ export default describe('Record route', () => {
             .get(`/records`)
             .expect(200));
 
+    /*
     it('should create new record', () =>
         request(app)
             .post(`/records`)
@@ -34,8 +36,8 @@ export default describe('Record route', () => {
             })
             .expect(201)
             .expect((response) => response.body.status === 'ok'));
-
     /**/
+    /*/
     it('Should create new record and chceck if the record exists', () =>
         request(app)
             .post(`/records`)
@@ -57,4 +59,13 @@ export default describe('Record route', () => {
                         .expect(200),
             ));
     /**/
+
+    jest.setTimeout(30000);
+
+    it('should create new record mocked from mobile', () =>
+        request(app)
+            .post(`/records`)
+            .send(MOCK1)
+            .expect(201)
+            .expect((response) => response.body.status === 'ok'));
 });
