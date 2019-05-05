@@ -15,24 +15,28 @@ export async function postItem(
 ): Promise<IPostRecordResponse> {
     let ratings: IRatings = {} as any;
 
+    let faceImage: File | undefined = undefined;
+
     if (request.record.faceImage) {
-        const faceImage = new Buffer(request.record.faceImage, 'base64');
+        const faceImageBuffer = new Buffer(request.record.faceImage, 'base64');
         const faceImageHash = crypto
             .createHash('sha256')
-            .update(faceImage)
+            .update(faceImageBuffer)
             .digest('hex');
 
-        const file = await File.query().insert(
+        faceImage = await File.query().insert(
             new File({
                 //record: record.id,
                 mime: 'image/jpeg',
                 hash: faceImageHash,
-                content: faceImage,
+                content: faceImageBuffer,
             }),
         );
 
-        ratings = await getFaceData(file);
+        ratings = await getFaceData(faceImage);
     }
+
+    console.log(faceImage);
 
     const record = await Record.query().insert(
         new Record({
@@ -42,11 +46,12 @@ export async function postItem(
             coords_longitude: request.record.coordinates.longitude,
             geojson: await geocodeReverse(request.record.coordinates),
             ratings,
+            faceImageId: faceImage && faceImage.id, //todo better
         }),
     );
 
     return {
         status: 'created',
-        record: new Record(record).expanded(),
+        record: await new Record(record).expanded(),
     };
 }

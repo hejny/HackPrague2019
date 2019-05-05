@@ -7,10 +7,12 @@ import { Record } from '../../model/Record';
 export async function getRecord({
     id,
 }: IGetRecordQuery): Promise<IGetRecordResponse> {
-    const records = await Record.query()
-        .where({ uuid: id })
-        .select()
-        .map((raw) => new Record(raw).expanded());
+    const records = await Promise.all(
+        (await Record.query()
+            .where({ uuid: id })
+            .eager('faceImage')
+            .select()).map((raw) => new Record(raw).expanded()),
+    );
 
     if (records.length === 0) {
         return {

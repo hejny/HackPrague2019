@@ -1,6 +1,8 @@
+import { File } from './File';
 import { IRatings } from './../../interfaces/IRatings';
 import { AbstractModel } from './AbstractModel';
 import * as uuid from 'uuid';
+import { RelationMappings, Model } from 'objection';
 
 export class Record extends AbstractModel {
     static tableName = 'Record';
@@ -15,6 +17,8 @@ export class Record extends AbstractModel {
     coords_longitude: number;
     geojson: {};
     ratings: IRatings;
+    faceImageId: number;
+    faceImage: File;
 
     constructor(raw: Partial<Record> = {}) {
         super();
@@ -40,7 +44,7 @@ export class Record extends AbstractModel {
         }
     }
 
-    expanded(): any {
+    async expanded(): Promise<any> {
         const {
             uuid,
             created,
@@ -49,6 +53,7 @@ export class Record extends AbstractModel {
             coords_longitude,
             geojson,
             ratings,
+            faceImage,
         } = this;
 
         const rating = this.countRating();
@@ -56,6 +61,9 @@ export class Record extends AbstractModel {
             latitude: coords_latitude,
             longitude: coords_longitude,
         };
+
+        //await Record.query().where({ id: this. })
+
         return {
             uuid,
             created,
@@ -64,24 +72,24 @@ export class Record extends AbstractModel {
             geojson,
             ratings,
             rating,
+            faceImageUrl: new File(faceImage).publicUrl,
         };
     }
 
-    collapsed(): any {
+    async collapsed(): Promise<any> {
         const {
             uuid,
-            created,
             recorded,
             coordinates,
-            geojson,
-            ratings,
             rating,
-        } = this.expanded();
+            //faceImageUrl,
+        } = await this.expanded();
         return {
             uuid,
             recorded,
             coordinates,
             rating,
+            //faceImageUrl,
         };
     }
 
@@ -91,4 +99,15 @@ export class Record extends AbstractModel {
     $beforeUpdate() {
         this.serializeToDB();
     }
+
+    static relationMappings: RelationMappings = {
+        faceImage: {
+            relation: Model.HasOneRelation,
+            modelClass: 'File',
+            join: {
+                from: 'Record.faceImageId',
+                to: 'File.id',
+            },
+        },
+    };
 }
