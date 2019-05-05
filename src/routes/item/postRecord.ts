@@ -18,7 +18,13 @@ export async function postItem(
     let faceImage: File | undefined = undefined;
 
     if (request.record.faceImage) {
-        const faceImageBuffer = new Buffer(request.record.faceImage, 'base64');
+        const matches = request.record.faceImage.match(
+            /^data:.+\/(.+);base64,(.*)$/,
+        )!;
+        const mime = matches[1];
+        const data = matches[2];
+
+        const faceImageBuffer = new Buffer(data, 'base64');
         const faceImageHash = crypto
             .createHash('sha256')
             .update(faceImageBuffer)
@@ -27,7 +33,7 @@ export async function postItem(
         faceImage = await File.query().insert(
             new File({
                 //record: record.id,
-                mime: 'image/jpeg',
+                mime,
                 hash: faceImageHash,
                 content: faceImageBuffer,
             }),
