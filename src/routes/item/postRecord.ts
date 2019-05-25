@@ -40,7 +40,7 @@ export async function postItem(
         );
 
         ratings = {
-            face: await getFaceData(faceImage),
+            ...(await getFaceData(faceImage)),
             noice: {
                 volume: Math.random(), //todo real
             },

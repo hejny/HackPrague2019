@@ -37,6 +37,7 @@ export class Record extends AbstractModel {
     }
 
     countRating(): number | null {
+        return this.ratings.noice.volume; //todo
         try {
             return this.ratings.face.emotion.happiness; //todo more complex
         } catch (e) {

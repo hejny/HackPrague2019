@@ -1,3 +1,20 @@
 .record {
-    border: 1px solid rebeccapurple;
+    border: 2px solid #ccc;
+    margin: 10px;
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+.record h1 {
+    font-size: 1em;
+}
+
+.record svg {
+    vertical-align: top;
+}
+
+.record pre {
+    display: inline-block;
+    width: 300px;
+    float: right;
 }

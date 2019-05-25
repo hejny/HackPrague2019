@@ -4,7 +4,9 @@ import { IRatings, IRatingsFace } from './../../interfaces/IRatings';
 import { AZURE_APIKEY } from '../config';
 import axios from 'axios';
 
-export async function getFaceData(file: File): Promise<IRatingsFace> {
+export async function getFaceData(
+    file: File,
+): Promise<{ face: IRatingsFace; faceRaw: any }> {
     const url =
         'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect';
 
@@ -39,7 +41,29 @@ export async function getFaceData(file: File): Promise<IRatingsFace> {
         throw new Error(`No face detected.`);
     }
 
-    return response.data[0].faceAttributes;
+    let face: IRatingsFace = {
+        smile: Math.random(),
+        gender: 'male',
+        age: 25,
+        emotion: {
+            anger: Math.random(),
+            contempt: Math.random(),
+            disgust: Math.random(),
+            fear: Math.random(),
+            happiness: Math.random(),
+            neutral: Math.random(),
+            sadness: Math.random(),
+            surprise: Math.random(),
+        },
+    };
+    try {
+        face = response.data[0].faceAttributes;
+    } catch (e) {}
+
+    return {
+        face,
+        faceRaw: response.data,
+    };
 }
 
 /*

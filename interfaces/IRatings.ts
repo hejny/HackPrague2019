@@ -1,5 +1,6 @@
 export interface IRatings {
     face: IRatingsFace;
+    faceRaw: any;
     noice: {
         volume: number;
     };
@@ -23,7 +24,7 @@ export interface IRatings {
 export interface IRatingsFace {
     smile: number;
     gender: 'male' | 'female';
-    age: 25;
+    age: number;
     emotion: {
         anger: number;
         contempt: number;

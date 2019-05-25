@@ -9,7 +9,7 @@ export async function getRecords(): Promise<IGetRecordsResponse> {
         (await Record.query()
             //.eager('faceImage')
             .orderBy('id', 'desc')
-            .limit(10)
+            //.limit(10)
             .select()).map((raw) => new Record(raw).collapsed()),
     );
 
