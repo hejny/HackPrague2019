@@ -1,3 +1,6 @@
+!!! This app was made on a hackathon and not maintained after that. So expect a very pure code quality.
+
+
 # HackPrague2019
 Project for hackathon HackPrague 
 
